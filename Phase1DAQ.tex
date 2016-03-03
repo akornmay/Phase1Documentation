@@ -1,0 +1,64 @@
+\documentclass[twoside,openright,titlepage,a4paper,11pt,chapterprefix,appendixprefix]{scrreprt}%
+%\usepackage[ngerman]{babel} % deutsche Silbentrennung
+\usepackage[ansinew]{inputenc} % wegen deutschen Umlauten
+\usepackage{graphicx}
+\usepackage{subfigure}
+\subfigcapmargin = 0.2cm
+\usepackage{mathcomp}
+\usepackage{amsmath}
+\usepackage[format=plain ,margin={1cm,1cm}]{caption} %koma script ist standartmäßig auf "hang", links und rechts eingerückt
+\usepackage{chapterfolder}
+\usepackage[figuresright]{rotating}
+\usepackage{hyperref}
+% and we re-write includegraphics
+\let\includegraphicsWithoutCF\includegraphics
+\renewcommand{\includegraphics}[2][]{\includegraphicsWithoutCF[#1]{\cfcurrentfolder#2}}
+\newcommand{\isEmbedded}{true}
+\usepackage{verbatim}
+\usepackage{appendix}
+
+\pagestyle{headings} % wir wollen auf jeder Seite eine Ueberschrift
+
+\setlength{\unitlength}{1cm}
+\setlength{\oddsidemargin}{0.3cm}
+\setlength{\evensidemargin}{0.3cm}
+\setlength{\textwidth}{15.5cm}
+\setlength{\topmargin}{-0.7cm}
+%\setlength{\textheight}{22cm} %bei seitlich
+\setlength{\textheight}{23cm} %bei mittig
+
+
+\begin{document}
+
+% --- Deckblatt ---------------------------------------------------------
+\thispagestyle{empty}
+\vspace{18mm}
+
+\begin{addmargin}{2cm}
+\begin{center}
+	{\huge Pixel Phase 1 DAQ Documentation}
+\end{center}
+\end{addmargin}
+
+
+\tableofcontents
+
+%% content chapters written separately and imported
+\cfchapter{AMC13}{AMC13}{AMC13.tex}
+\cfchapter{Front End Driver (FED)}{FED}{FED.tex}
+\cfchapter{Pixel Front End Controler (pixFEC)}{pixFEC}{pixFEC.tex}
+\cfchapter{Tracker Front End Controler (tkFEC)}{tkFEC}{tkFEC.tex}
+
+
+
+
+\listoffigures
+\listoftables
+
+
+\appendix
+\addappheadtotoc
+
+\end{document}
+
+
