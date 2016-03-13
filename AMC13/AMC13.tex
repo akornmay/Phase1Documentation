@@ -36,7 +36,68 @@
 \fi
 % ******************************************************************************
 
-Here comes the text of the chapter or part.
+\section{AMC13 prerequisites}
+\begin{itemize}
+\item TTC links from AMC13 to AMCs needs to be enabled explicitly on per-slot basis
+\item AMC13 needs a LHC-like input (clock) signal for QPLL to lock:
+      \begin{itemize}
+        \item internal 40MHz oscillator does not work
+        \item either TTC data-stream from TTCci (~80.16 MHz bi-phase encoded)
+        \end{itemize}
+\item external (BU) clock board (80.16 MHz clock)
+\item these need to be provided via the TTC SFP (Rx)
+\item AMC13 TTC simulator mode will not work for pixels
+\end{itemize}
+
+
+
+\section{Setting everything up for the test stand}
+
+\subsection{TTC Configuration for test stand}
+\begin{itemize}
+\item we usually use the following TTCci config for our uTCA system:
+      \begin{itemize}
+        \item BC0 every orbit
+        \item BGO Ch15: 0x2c - charge inject @ BX 101, repetetive, optional prescale
+        \item cyclic L1A: BX 199 (98 BX after the charge inject), repetitive, optional prescale
+        \end{itemize}
+\end{itemize}
+
+\subsection{AMC13 Configuration}
+\begin{itemize}
+\item AMC13 offers 4 BGO channels (BC0 is sent automatically every orbit)
+      \begin{itemize}
+        \item can configure any command and send single or cyclic BGOs (orbit prescale is possible)
+        \item this is rather flexible
+        \item EC0 and OC0 can be user enabled
+        \end{itemize}
+\item L1A is available in 3 modes:
+      \begin{itemize}
+        \item 0: periodic triggers spaced by rate orbits at BX=500
+        \item 1: periodic triggers spaced by rate BX
+        \item 2: random trigger at 2 * rate Hz
+        \end{itemize}  
+\item these are configured with rate and rules (\url{amc13.info}) attributes
+\item this config can be used to either send burst triggers (also single) or continuously
+\end{itemize}
+
+\subsection{Pixel Test Stand Configuration for standalone AMC13}
+\begin{itemize}
+\item restrictions on BGO \& L1A config leave 1 possible config for the AMC13
+\item BGO Ch0: cmd=0x2c, repeat=1, prescale=0, BX=380 (sent 20 BX later than that, makes BX 400)
+\item L1A: mode=0, rate=1 burst=1 rules=0
+      \begin{itemize}
+        \item this equals to: 1 L1A every orbit @ BX 500, 1 BGO (0x2c) every orbit at BX 401
+        \item 20 BX delay for the BGO have to be considered
+        \end{itemize}
+\item L1A is rescaled via ‘rate’ attribute, BGO via ‘prescale’ attribute
+\end{itemize}
+
+
+
+
+
+
 
 % ******************************************************************************
 \ifx\isEmbedded\undefined

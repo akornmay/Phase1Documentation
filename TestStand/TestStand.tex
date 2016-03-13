@@ -69,8 +69,32 @@ The specifications of the shown parts and how to run them can be found in their 
 \item A diverse set of power supplies and maybe an oszilloscop
 \end{itemize}
 
+
+\subsection{Useful tools for debugging and setting up}
+
+\begin{itemize}
+\item uSD card reader for JTAG-free CTA FW management
+\item Xilinx USB cable for debugging (FW upload)
+\item Lab PC with 2 Ethernet ports (SLC6)
+\item 1Ghz Oscilloscope
+\item opto-electrical converter for debugging of CLK lines
+\item differential probe, single ended probes for debug FMC on FED
+\end{itemize}
+
+\subsection{Software tools}
+\begin{itemize}
+\item Wireshark for spying on TCP traffic \& determining MAC addresses (via yum)
+\item ic\_mmc tools (imgtool for FW upload to SD card) (see FC7 user guide)
+\item AMC13 development tools (to set RARP mode on AMC13)
+\item natVIEW for crate-backplane configuration
+\item IPMItool (via yum)
+\item FED CMD line tools (\url{https://github.com/gauzinge/FED_burnin/tree/FIFO})
+\item modified FEC SW including modified BPixelTools (available on FEC SW SVN)
+
+\end{itemize}
 \newpage
-\subsection{Setting up infrastructure}
+\section{Setting up infrastructure}
+\subsection{Getting started}
 \begin{itemize}
 \item uTCA Shelf, MCH \& Power module should be plug \& play
 \item MCH has a default IP address that can be changed via web interface (see NAT documentation)
@@ -122,7 +146,6 @@ The specifications of the shown parts and how to run them can be found in their 
 \item arp -e command is your friend
 \item see \url{https://twiki.cern.ch/twiki/bin/viewauth/CMS/Ph1PixelDAQTest}
 \end{itemize}
-
 
 
 
