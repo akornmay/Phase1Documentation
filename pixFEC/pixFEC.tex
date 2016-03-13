@@ -36,7 +36,28 @@
 \fi
 % ******************************************************************************
 
-Here comes the text of the chapter or part.
+\subsection{FEC configuration}
+\begin{itemize}
+\item TkFEC: modified version of FEC SW available on SVN (make Generic, make APIConsoleDebugger for CMD line operation)
+\begin{itemize}
+        \item \url{https://svnweb.cern.ch/cern/wsvn/cmsptdaqup/CMS_UPGRADES_IPHC/SOFTWARE/PHASE_1/CTRL/tags/TK_FEC_FMC8SFP_4CTRLRING_V01/?#a9e50ea3b3bff0b870e7f5f38e685e2a6}
+        \item \url{https://twiki.cern.ch/twiki/bin/viewauth/CMS/AddingAnUtcaRingDevice}
+\end{itemize}
+\item PxFEC: SW adaptation in progress (no “release” yet)
+\item Ring 0 / Link 0 is on the bottom of bottom FMC
+\item Fibre mapping for 1 FMC can be seen in \ref{pic:FECFibreMapping}
+
+
+\end{itemize}
+
+\begin{figure}[]
+\centering
+\includegraphics[width=\textwidth]{../images/FEC_fibre_mapping.pdf}
+\caption[FEC fibre mapping]{\label{pic:FECFibreMapping} \textbf{FEC fibre mapping}\\
+}
+\end{figure}
+
+
 
 % ******************************************************************************
 \ifx\isEmbedded\undefined
