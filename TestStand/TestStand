@@ -1,0 +1,80 @@
+
+\ifx\isEmbedded\undefined
+
+%%%%% copy from main
+\documentclass[twoside,openright,titlepage,a4paper,11pt,chapterprefix,appendixprefix]{scrreprt}%
+%\usepackage[ngerman]{babel} % deutsche Silbentrennung
+\usepackage[ansinew]{inputenc} % wegen deutschen Umlauten
+\usepackage{graphicx}
+\usepackage{subfigure}
+\subfigcapmargin = 0.2cm
+\usepackage{mathcomp}
+\usepackage{amsmath}
+\usepackage[format=plain ,margin={1cm,1cm}]{caption} %koma script ist standartmäßig auf "hang", links und rechts eingerückt
+\usepackage{chapterfolder}
+% and we re-write includegraphics
+\let\includegraphicsWithoutCF\includegraphics
+\renewcommand{\includegraphics}[2][]{\includegraphicsWithoutCF[#1]{\cfcurrentfolder#2}}
+
+
+\pagestyle{headings} % wir wollen auf jeder Seite eine Ueberschrift
+
+\setlength{\unitlength}{1cm}
+\setlength{\oddsidemargin}{0.3cm}
+\setlength{\evensidemargin}{0.3cm}
+\setlength{\textwidth}{15.5cm}
+\setlength{\topmargin}{-0.7cm}
+%\setlength{\textheight}{22cm} %bei seitlich
+\setlength{\textheight}{23cm} %bei mittig
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+
+\else
+\fi
+% ******************************************************************************
+
+This chapter gives a brief summary about all the components neccessary to setup a test stand for the Pixel Phase 1 data acquisition system (DAQ).
+It is shown how all components are connected.
+The specifications of the shown parts and how to run them can be found in their respective chapter.
+
+
+\section{Minimal set of components needed for the Phase 1 DAQ Test Stand}
+
+\subsubsection{For the DAQ system}
+\begin{itemize}
+\item $\mu$TCA Crate -- hosts all the $\mu$TCA cards, distributes signals over back plane
+\item MCH -- MicroTCA Carrier Hub, manages all cards in crate
+\item AMC13 -- interface to CMS TCDS (trigger \& clock distribution system) 
+\item Optical clock source -- small card that creates a 40.08MHz clock
+\item FC7/CTA -- CMS Tracker AMC, base board for most DAQ components
+\begin{itemize}
+\item tkFEC -- Tracker Front End Controller, sends control signals to the CCU board
+\item pixFEC -- Pixel Front End Controller, sends control signals to the detector modules
+\item FED -- Front End Driver, receives signals from the detector modules
+\end{itemize}
+\end{itemize}
+
+\subsubsection{For the test bench}
+
+\begin{itemize}
+\item PortCard -- equipped with POHs (Pixel Opto-Hybrids), conversion from electrical to optical signals
+\item DOH mother board -- Digital Opto-Hybrids, conversion from optical to electrical signals
+\item CCU board -- Communication \& Control Unit
+\item Pixel Module
+\item Fibre adaptors
+\item Optical fibres
+\item A diverse set of power supplies and maybe an oszilloscop
+\end{itemize}
+
+
+
+
+% ******************************************************************************
+\ifx\isEmbedded\undefined
+\input{../biblio.tex}
+\end{document}
+\else
+\fi

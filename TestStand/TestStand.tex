@@ -1,0 +1,135 @@
+
+\ifx\isEmbedded\undefined
+
+%%%%% copy from main
+\documentclass[twoside,openright,titlepage,a4paper,11pt,chapterprefix,appendixprefix]{scrreprt}%
+%\usepackage[ngerman]{babel} % deutsche Silbentrennung
+\usepackage[ansinew]{inputenc} % wegen deutschen Umlauten
+\usepackage{graphicx}
+\usepackage{subfigure}
+\subfigcapmargin = 0.2cm
+\usepackage{mathcomp}
+\usepackage{amsmath}
+\usepackage[format=plain ,margin={1cm,1cm}]{caption} %koma script ist standartmäßig auf "hang", links und rechts eingerückt
+\usepackage{chapterfolder}
+% and we re-write includegraphics
+\let\includegraphicsWithoutCF\includegraphics
+\renewcommand{\includegraphics}[2][]{\includegraphicsWithoutCF[#1]{\cfcurrentfolder#2}}
+
+
+\pagestyle{headings} % wir wollen auf jeder Seite eine Ueberschrift
+
+\setlength{\unitlength}{1cm}
+\setlength{\oddsidemargin}{0.3cm}
+\setlength{\evensidemargin}{0.3cm}
+\setlength{\textwidth}{15.5cm}
+\setlength{\topmargin}{-0.7cm}
+%\setlength{\textheight}{22cm} %bei seitlich
+\setlength{\textheight}{23cm} %bei mittig
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+
+\else
+\fi
+% ******************************************************************************
+
+This chapter gives a brief summary about all the components neccessary to setup a test stand for the Pixel Phase 1 data acquisition system (DAQ).
+It is shown how all components are connected.
+The specifications of the shown parts and how to run them can be found in their respective chapter.
+
+
+\section{Minimal set of components needed for the Phase 1 DAQ Test Stand}
+
+\subsubsection{For the DAQ system}
+\begin{itemize}
+\item $\mu$TCA Crate -- hosts all the $\mu$TCA cards, distributes signals over back plane
+\item MCH -- MicroTCA Carrier Hub, manages all cards in crate
+\item AMC13 -- interface to CMS TCDS (trigger \& clock distribution system) 
+\item Optical clock source -- small card that creates a 40.08MHz clock
+\item FC7/CTA -- CMS Tracker AMC, base board for most DAQ components
+\begin{itemize}
+\item tkFEC -- Tracker Front End Controller, sends control signals to the CCU board
+\item pixFEC -- Pixel Front End Controller, sends control signals to the detector modules
+\item FED -- Front End Driver, receives signals from the detector modules
+\end{itemize}
+\end{itemize}
+
+\subsubsection{For the test bench}
+
+\begin{itemize}
+\item PortCard -- equipped with POHs (Pixel Opto-Hybrids), conversion from electrical to optical signals
+\item DOH mother board -- Digital Opto-Hybrids, conversion from optical to electrical signals
+\item CCU board -- Communication \& Control Unit
+\item Pixel Module
+\item Fibre adaptors
+\item Optical fibres
+\item A diverse set of power supplies and maybe an oszilloscop
+\end{itemize}
+
+\newpage
+\subsection{Setting up infrastructure}
+\begin{itemize}
+\item uTCA Shelf, MCH \& Power module should be plug \& play
+\item MCH has a default IP address that can be changed via web interface (see NAT documentation)
+\begin{itemize}
+        \item simplest solution is to use a static IP \& subnet mask
+        \item could also use DHCP server running on local lab PC for IP assignment (similar to P5 but maybe overkill)
+\end{itemize}
+\item Lab PC needs to have 2 ethernet ports (1 for global network, one for local uTCA LAN)
+\begin{itemize}
+\item configure the local LAN port to have static IP \& subnet same as MCH
+\item install uHAL (\url{cactus.web.cern.ch})
+\item install RARPD (daemon) for AMC13 / CTA IP assignment
+\end{itemize}
+\item verify that you can ping the MCH (a USB format serial cable delivered with MCH can be used to connect via miniCOM terminal application in case ethernet does not behave at all)
+\end{itemize}
+
+
+
+\subsection{Preparing FC7 cards}
+
+
+\subsubsection{Before pluging the card in}
+\begin{itemize}
+\item FC7 manual, although not complete, provides enough pointers to get started: \url{https://svnweb.cern.ch/cern/wsvn/ph-ese/be/fc7/trunk/fc7/doc/}
+\item 2 configurations to be done on the board:
+\begin{itemize}
+\item set the powering switch to crate operation
+\item push the switches 1 \& 5 of the CPLD DIP switch down (includes FGPA in JTAG chain, sets FW loading from SD card after power on)
+\end{itemize}
+\item carefully insert card in crate - attention, the switch that is actuated by the hot-swap handle is rather fragile
+\item if the card is properly seated in the crate, the blue LED at the bottom should light up and the corresponding LED on the MCH should blink
+\item insert the hot-swap handle - the card should power up \& load the FW image from SD card (see \ref{sec:LoadFirmware})
+\end{itemize}
+
+
+\subsubsection{Once the card is plugged in} \label{sec:LoadFirmware}
+\begin{itemize}
+\item use an external card reader to format the SD card following the instructions from the FC7 manual p13
+\item upload an FC7 GoldenImage and / or a pixel specific image following the instructions
+\item caveat 1: one image must always be called “GoldenImage.bin” - this is what gets loaded on power-up
+\item caveat 2: FW files *must* be .bin format   
+\end{itemize}
+
+\subsubsection{Network configuration with RARP}
+\begin{itemize}
+\item all pixel-specific FW uses RARP mode for the CTA
+\item MAC address is easily found out using wireshark
+\item requires edit of /etc/ethers \& /etc/hosts \& ‘sudo /etc/init.d/rarpd restart’
+\item arp -e command is your friend
+\item see \url{https://twiki.cern.ch/twiki/bin/viewauth/CMS/Ph1PixelDAQTest}
+\end{itemize}
+
+
+
+
+
+% ******************************************************************************
+\ifx\isEmbedded\undefined
+\input{../biblio.tex}
+\end{document}
+\else
+\fi
