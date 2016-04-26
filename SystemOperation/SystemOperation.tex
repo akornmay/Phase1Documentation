@@ -1,0 +1,89 @@
+
+\ifx\isEmbedded\undefined
+
+%%%%% copy from main
+\documentclass[twoside,openright,titlepage,a4paper,11pt,chapterprefix,appendixprefix]{scrreprt}%
+%\usepackage[ngerman]{babel} % deutsche Silbentrennung
+\usepackage[ansinew]{inputenc} % wegen deutschen Umlauten
+\usepackage{graphicx}
+\usepackage{subfigure}
+\subfigcapmargin = 0.2cm
+\usepackage{mathcomp}
+\usepackage{amsmath}
+\usepackage[format=plain ,margin={1cm,1cm}]{caption} %koma script ist standartmäßig auf "hang", links und rechts eingerückt
+\usepackage{chapterfolder}
+% and we re-write includegraphics
+\let\includegraphicsWithoutCF\includegraphics
+\renewcommand{\includegraphics}[2][]{\includegraphicsWithoutCF[#1]{\cfcurrentfolder#2}}
+
+
+\pagestyle{headings} % wir wollen auf jeder Seite eine Ueberschrift
+
+\setlength{\unitlength}{1cm}
+\setlength{\oddsidemargin}{0.3cm}
+\setlength{\evensidemargin}{0.3cm}
+\setlength{\textwidth}{15.5cm}
+\setlength{\topmargin}{-0.7cm}
+%\setlength{\textheight}{22cm} %bei seitlich
+\setlength{\textheight}{23cm} %bei mittig
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+
+\else
+\fi
+% ******************************************************************************
+
+This section will show how one can run and operate the system to do basic tests.
+For now it only consists of the basics tools we developed at CERN but as soon as possible POS should also be integrated.
+
+The text follows the instructions found on Mia Liu's twiki \url{https://twiki.cern.ch/twiki/bin/viewauth/CMS/PixelPhase1SetupMicroTCA}.
+
+All examples are made for the TIF test stand for now but should be kept as generic as possible.
+
+\section{Setting up the CCU and Portcard}
+
+First make sure the correct environment variables have been picked up.
+ On \texttt{cmsuppixpc001} you would do for example
+\code{source ~/setup.sh}
+
+We are working in the following with the BPixelTools version that can run on the microTCA system.
+ Change the directory there and also source the needed environment variables.
+\code{cd  ~/FEC\_SW/Pixel/BPixelTools/}
+\code{source setenv.sh}
+
+Then change to the CCU directory
+\code{cd ccu}
+\\From here we configure the CCU by running
+\code{bin/ccu -utca ~/FEC\_SW/connections.xml -fechardwareid board -ccu 0x3f -channel 0x11}
+\\This will open an interactive shell where first
+\code{scanccu}
+\\and
+\code{scanringdevice}
+\\needs to be run.
+If everything worked fine and there were no errors the Portcard can be initialised by running the script
+\code{Init4ChPortcard\_uTCA.sh}
+
+To control the sending of triggers with the TTCci system we have to start HyperDAQ.
+ To do this, change to the directory
+\code{cd /home/fectest/FEC\_mTCA/pixel/PixelRun}
+\\There run the appropriate shell script
+\code{./run\_noRU\_TIF.sh}
+\\From the browser \url{IStillNeedTheURL} you can control the TTCci sytstem then.
+
+
+\section{Running the microTCA FED}
+
+
+
+
+
+
+% ******************************************************************************
+\ifx\isEmbedded\undefined
+\input{../biblio.tex}
+\end{document}
+\else
+\fi
