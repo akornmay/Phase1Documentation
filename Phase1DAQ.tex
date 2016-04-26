@@ -2,8 +2,8 @@
 %\usepackage[ngerman]{babel} % deutsche Silbentrennung
 \usepackage[ansinew]{inputenc} % wegen deutschen Umlauten
 \usepackage{graphicx}
-\usepackage{subfigure}
-\subfigcapmargin = 0.2cm
+\usepackage{subcaption}
+%\subfigcapmargin = 0.2cm
 \usepackage{mathcomp}
 \usepackage{amsmath}
 \usepackage[format=plain ,margin={1cm,1cm}]{caption} %koma script ist standartm��ig auf "hang", links und rechts einger�ckt
@@ -16,6 +16,9 @@
 \newcommand{\isEmbedded}{true}
 \usepackage{verbatim}
 \usepackage{appendix}
+
+\newcommand{\code}[1]{\\ \noindent\hspace*{15mm} \texttt{#1}}
+
 
 \pagestyle{headings} % wir wollen auf jeder Seite eine Ueberschrift
 
@@ -49,7 +52,8 @@
 \cfchapter{Front End Driver (FED)}{FED}{FED.tex}
 \cfchapter{Pixel Front End Controler (pixFEC)}{pixFEC}{pixFEC.tex}
 \cfchapter{Tracker Front End Controler (tkFEC)}{pixFEC}{pixFEC.tex}
-
+\cfchapter{Operating the DAQ System}{SystemOperation}{SystemOperation.tex}
+\cfchapter{Debugging instructions}{Debugging}{Debugging.tex}
 
 
 

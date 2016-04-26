@@ -52,7 +52,7 @@ Since revision2 is the final production board for the Pixel Detector Phase1 upgr
 All LEDs have a label next to them what makes it easy to identify what voltage they show.
 All LEDs should be \textbf{ON}.
 \item[FC7 - MMC heart beat]\hfill\\
-The LED labled \textbf{LED4} indicates the heart beat of the Module Management Controller (MMC).
+The LED labelled \textbf{LED4} indicates the heart beat of the Module Management Controller (MMC).
 This LED should be flashing.
 
 \begin{figure}[hf]
@@ -68,9 +68,9 @@ This LED should be flashing.
 The FC7 is equipped with six LEDs on the front panel.
  Four of those LEDs have a defined behaviour on all FC7 cards.
  The remaining two LEDs are user defined and specific to whether the FC7 is configured as pixFED, pixFEC or tkFEC.
- The nameing convention of the LEDs can be found in figure \ref{pic:FC7front}.
+ The naming convention of the LEDs can be found in figure \ref{pic:FC7front}.
  The purpose of the four standard LEDs can be seen seen in figure \ref{pic:LEDtable}.
- For the different flavours of FC7 cards in the Pixel DAQ system, the purpose of the user defined LEDs is summarized in table \ref{tab:UserLEDs}.
+ For the different flavours of FC7 cards in the Pixel DAQ system, the purpose of the user defined LEDs is summarised in table \ref{tab:UserLEDs}.
 
 
 \begin{figure}[hf]
@@ -95,18 +95,27 @@ The FC7 is equipped with six LEDs on the front panel.
 FC7 flavour & TOP User LED & BOTTOM User LED \\ \hline \hline
 pixFED & unused & toggles with L1A triggers\\
 pixFEC & PLL locked & unused\\
-tkFEC & unknown & unknown\\
+tkFEC & unused & unused\\
 \hline
         \end{tabular} 
 \end{center}
 \end{table}                
 
+\end{description}
 
 
+\subsection{FMC cards}
+The two different FMC cards that make a FC7 board to either a FED or a FEC have a number of LED added to them.
 
+\begin{description}
+\item[FED FMC]\hfill\\
+The FED FMC shown in figure \ref{pic:FEDFMC} is equipped with seven LEDs.
+ None of them are currently used.
+ All LEDs are \textbf{ON}.
 
-
-
+\item[FEC FMC]\hfill\\
+Tracker FEC and Pixel FEC use the same FMC card.
+ Two LEDs on the card indicate the status of the +3.3V and the $\mathrm{V_{adj}}$ power supply, see figure \ref{pic:FECFMC}
 \end{description}
 
 
@@ -115,15 +124,15 @@ tkFEC & unknown & unknown\\
 \begin{subfigure}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=0.75\textwidth]{../images/FED_FMC.png}
-\caption[]{\label{pic:PLTTrackOcc_full}}
+\caption[]{\label{pic:FEDFMC}}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=0.75\textwidth]{../images/FEC_FMC.png}
-\caption[]{\label{pic:PLTTrackOcc_cut}}
+\caption[]{\label{pic:FECFMC}}
 \end{subfigure}
-\caption[Track occupancy for a single small angle telescope of the PLT]{\label{pic:PLTTrackOcc}
+\caption[FMC cards of the Pixel DAQ system]{\label{pic:PixelDAQFMC}
 }
 \end{figure}
 
